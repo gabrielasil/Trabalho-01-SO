@@ -31,7 +31,7 @@ using std::ofstream;
 
 void auxiliar(int l1, int c1, int l2, int c2){
     std::ofstream outfile;
-    outfile.open("/root/Fernanda/TI-2021.2/SO/trabalho-01/matrizes", std::ios_base::app); 
+    outfile.open("/root/Fernanda/TI-2021.2/SO/trabalho-01/Trabalho-01-SO/matriz1", std::ios_base::app); 
     std::vector<std::vector<int>>coluna1;/*cria o vetor da coluna1*/
     for(int i{0}; i<l1; i++){/*cria as l1 posicoes pra os vetores de linha*/
         coluna1.push_back(std::vector<int>());/*cria vetor dentro da posicao*/
@@ -41,8 +41,9 @@ void auxiliar(int l1, int c1, int l2, int c2){
         }
         outfile<<endl;
     }
-    outfile<<endl;
+    outfile.close();
 
+    outfile.open("/root/Fernanda/TI-2021.2/SO/trabalho-01/Trabalho-01-SO/matriz2", std::ios_base::app); 
     std::vector<std::vector<int>>coluna2;
     for(int i{0}; i<l2; i++){
         coluna2.push_back(std::vector<int>());
@@ -58,7 +59,9 @@ void auxiliar(int l1, int c1, int l2, int c2){
 
 
 int main(){
-    auxiliar(6, 6, 6, 6);
+    int l1, c1, l2, c2;
+    std::cin>>l1>>c1>>l2>>c2;
+    auxiliar(l1, c1, l2, c2);
     return 0;
 }
 
