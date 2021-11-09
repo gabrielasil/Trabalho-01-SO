@@ -15,12 +15,31 @@ void sequencial(FILE* matrizes){
 */
 
 int main(int argc, char *argv[]){
+    string arq1, arq2;
+    arq1 = argv[1];
+    arq2 = argv[2];
+    fstream arquivo1;
+    fstream arquivo2;
+    arquivo1.open(arq1, ios::in); /*le a matriz1*/
+
+    if (!arquivo1) {
+		cout << "No such file";
+	}
+
+    arquivo2.open(arq2, ios::in); 
+
+    if (!arquivo2) {
+		cout << "No such file";
+	}
+
+
+    /*
     int n1,m1,n2,m2;
     n1 = atoi(argv[1]);
     m1 = atoi(argv[2]);
     n2 = atoi(argv[3]);
     m2 = atoi(argv[4]);
-    //FILE* arquivo1, arquivo2;
+    //FILE* arquivo1, arquivo2; 
     //std::cin>>arquivo1>>arquivo2;
    //cria matriz 1
     vector<vector<int>> matriz1;
@@ -58,4 +77,7 @@ int main(int argc, char *argv[]){
 
 
     cout << "Tempo " <<chrono::duration_cast<chrono::microseconds>(end - begin).count() << "(ms)" <<endl;
+    */
+    arquivo1.close();
+    arquivo2.close();
 }
