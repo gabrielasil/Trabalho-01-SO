@@ -20,7 +20,8 @@ int main(int argc, char *argv[]){
     m1 = atoi(argv[2]);
     n2 = atoi(argv[3]);
     m2 = atoi(argv[4]);
-
+    //FILE* arquivo1, arquivo2;
+    //std::cin>>arquivo1>>arquivo2;
    //cria matriz 1
     vector<vector<int>> matriz1;
     for (int i = 0; i < n1; i++){

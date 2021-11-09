@@ -29,7 +29,14 @@ using std::ofstream;
 //cria vetor de coluna
 //preenche a coluna1 com os enderecos dos vetores de linha
 
-void auxiliar(int l1, int c1, int l2, int c2){
+
+int main(int argc, char *argv[]){
+    int l1,c1,l2,c2;
+    l1 = atoi(argv[1]);
+    c1 = atoi(argv[2]);
+    l2 = atoi(argv[3]);
+    c2 = atoi(argv[4]);
+
     std::ofstream outfile;
     outfile.open("/root/Fernanda/TI-2021.2/SO/trabalho-01/Trabalho-01-SO/matriz1", std::ios_base::app); 
     std::vector<std::vector<int>>coluna1;/*cria o vetor da coluna1*/
@@ -55,13 +62,6 @@ void auxiliar(int l1, int c1, int l2, int c2){
     }
     outfile<<endl;
     outfile.close();
-}
-
-
-int main(){
-    int l1, c1, l2, c2;
-    std::cin>>l1>>c1>>l2>>c2;
-    auxiliar(l1, c1, l2, c2);
     return 0;
 }
 
