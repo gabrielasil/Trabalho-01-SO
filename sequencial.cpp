@@ -15,22 +15,53 @@ void sequencial(FILE* matrizes){
 */
 
 int main(int argc, char *argv[]){
-    string arq1, arq2;
+    string arq1, /*arq2,*/ linha, num;
+    char c;
     arq1 = argv[1];
-    arq2 = argv[2];
+    int l1{0}, c1{0}, n, posn{0}, posl{0};
+    //arq2 = argv[2];
     fstream arquivo1;
-    fstream arquivo2;
+    //fstream arquivo2;
     arquivo1.open(arq1, ios::in); /*le a matriz1*/
 
     if (!arquivo1) {
 		cout << "No such file";
 	}
 
-    arquivo2.open(arq2, ios::in); 
+    //arquivo2.open(arq2, ios::in); 
 
-    if (!arquivo2) {
-		cout << "No such file";
-	}
+    //if (!arquivo2) {
+	//	cout << "No such file";
+	//}
+
+    //le linha por linha do arquivo
+    if(arquivo1.is_open()){
+        while(arquivo1){
+            //le uma linha do arquivo e coloca em string
+            std::getline(arquivo1, linha);
+            while(linha[posl]!='/0'){
+                while(linha[posl]!= ' '){
+                    num[posn] = linha[posl];
+                    posn++;
+                    posl++;
+                }
+                posn++;
+                num[posn] = '/0';
+                 //imprime o numero
+                std::cout<<num<< " ";
+                posl++;
+                posn = 0;
+            }
+            //atualiza o numero de linhas
+            l1++;
+            //std::cout<<endl;
+            //escreve a matriz encontrada no terminal
+            //std::cout<<linha<<endl;
+        }
+    }
+
+    //leitura da matriz deve guardar o numero de linhas da primeira matriz e o numero de colunas da segunda matriz
+
 
 
     /*
@@ -79,5 +110,5 @@ int main(int argc, char *argv[]){
     cout << "Tempo " <<chrono::duration_cast<chrono::microseconds>(end - begin).count() << "(ms)" <<endl;
     */
     arquivo1.close();
-    arquivo2.close();
+    //arquivo2.close();
 }
