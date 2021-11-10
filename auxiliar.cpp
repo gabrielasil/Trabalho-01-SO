@@ -43,7 +43,7 @@ int main(int argc, char *argv[]){
     for(int i{0}; i<l1; i++){/*cria as l1 posicoes pra os vetores de linha*/
         coluna1.push_back(std::vector<int>());/*cria vetor dentro da posicao*/
         for(int j{0}; j<c1; j++){/*preenche o vetor da linha*/
-            coluna1[i].push_back(rand()%10+1);/*gera um valor aleatorio*/
+            coluna1[i].push_back(rand()%10);/*gera um valor aleatorio*/
             outfile<<coluna1[i][j]<<" ";
         }
         outfile<<endl;
@@ -55,7 +55,7 @@ int main(int argc, char *argv[]){
     for(int i{0}; i<l2; i++){
         coluna2.push_back(std::vector<int>());
         for(int j{0}; j<c2; j++){
-            coluna2[i].push_back(rand()%10+1);
+            coluna2[i].push_back(rand()%10);
             outfile<<coluna2[i][j]<<" ";
         }
         outfile<<endl;
