@@ -7,6 +7,8 @@ using std::endl;
 using std::ofstream;
 #include <cstdlib>
 using namespace std;
+#include <string>
+#include <stdio.h>
 
 /*
 void sequencial(FILE* matrizes){    
@@ -15,52 +17,74 @@ void sequencial(FILE* matrizes){
 */
 
 int main(int argc, char *argv[]){
-    string arq1, /*arq2,*/ linha, num;
-    char c;
+    string arq1, arq2, linha;
+    char num;
     arq1 = argv[1];
-    int l1{0}, c1{0}, n, posn{0}, posl{0};
-    //arq2 = argv[2];
+    int l1{0}, c1{0}, l2{0}, c2{0}, n, pos{0};
+    arq2 = argv[2];
     fstream arquivo1;
-    //fstream arquivo2;
-    arquivo1.open(arq1, ios::in); /*le a matriz1*/
+    fstream arquivo2;
+    //abre o arquivo 1
+    arquivo1.open(arq1, ios::in); 
 
     if (!arquivo1) {
 		cout << "No such file";
 	}
 
-    //arquivo2.open(arq2, ios::in); 
-
-    //if (!arquivo2) {
-	//	cout << "No such file";
-	//}
-
-    //le linha por linha do arquivo
+    //le o arquivo 1
+    vector<vector<int>> matriz1;
     if(arquivo1.is_open()){
         while(arquivo1){
             //le uma linha do arquivo e coloca em string
             std::getline(arquivo1, linha);
-            while(linha[posl]!='/0'){
-                while(linha[posl]!= ' '){
-                    num[posn] = linha[posl];
-                    posn++;
-                    posl++;
+            matriz1.push_back(vector<int>());
+            c1 = 0;
+            while(linha[pos]!='\0'){
+                if(linha[pos]!=' '){
+                    num = linha[pos];
+                    n = atoi(&num);
+                    matriz1[l1].push_back(n);
+                    std::cout<<matriz1[l1][c1]<< " ";
+                    //fflush(stdout);
+                    c1++;
                 }
-                posn++;
-                num[posn] = '/0';
-                 //imprime o numero
-                std::cout<<num<< " ";
-                posl++;
-                posn = 0;
+                pos++;
             }
-            //atualiza o numero de linhas
+            pos = 0;
+            std::cout<<endl;
             l1++;
-            //std::cout<<endl;
-            //escreve a matriz encontrada no terminal
-            //std::cout<<linha<<endl;
         }
     }
 
-    //leitura da matriz deve guardar o numero de linhas da primeira matriz e o numero de colunas da segunda matriz
+    arquivo2.open(arq2, ios::in); 
+
+    if (!arquivo2) {
+		cout << "No such file";
+	}
+    pos = 0;
+    vector<vector<int>> matriz2;
+    if(arquivo2.is_open()){
+        while(arquivo2){
+            //le uma linha do arquivo e coloca em string
+            std::getline(arquivo2, linha);
+            matriz2.push_back(vector<int>());
+            c2 = 0;
+            while(linha[pos]!='\0'){
+                if(linha[pos]!=' '){
+                    num = linha[pos];
+                    n = atoi(&num);
+                    matriz2[l2].push_back(n);
+                    std::cout<<matriz2[l2][c2]<< " ";
+                    //fflush(stdout);
+                    c2++;
+                }
+                pos++;
+            }
+            pos = 0;
+            std::cout<<endl;
+            l2++;
+        }
+    }
 
 
 
