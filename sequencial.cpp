@@ -24,6 +24,7 @@ int main(int argc, char *argv[]){
     arq2 = argv[2];
     fstream arquivo1;
     fstream arquivo2;
+    //fstream arquivo3;
     //abre o arquivo 1
     arquivo1.open(arq1, ios::in); 
 
@@ -44,14 +45,14 @@ int main(int argc, char *argv[]){
                     num = linha[pos];
                     n = atoi(&num);
                     matriz1[l1].push_back(n);
-                    std::cout<<matriz1[l1][c1]<< " ";
+                    //std::cout<<matriz1[l1][c1]<< " ";
                     //fflush(stdout);
                     c1++;
                 }
                 pos++;
             }
             pos = 0;
-            std::cout<<endl;
+            //std::cout<<endl;
             l1++;
         }
     }
@@ -74,65 +75,48 @@ int main(int argc, char *argv[]){
                     num = linha[pos];
                     n = atoi(&num);
                     matriz2[l2].push_back(n);
-                    std::cout<<matriz2[l2][c2]<< " ";
+                    //std::cout<<matriz2[l2][c2]<< " ";
                     //fflush(stdout);
                     c2++;
                 }
                 pos++;
             }
             pos = 0;
-            std::cout<<endl;
+            //std::cout<<endl;
             l2++;
         }
     }
 
-
-
-    /*
-    int n1,m1,n2,m2;
-    n1 = atoi(argv[1]);
-    m1 = atoi(argv[2]);
-    n2 = atoi(argv[3]);
-    m2 = atoi(argv[4]);
-    //FILE* arquivo1, arquivo2; 
-    //std::cin>>arquivo1>>arquivo2;
-   //cria matriz 1
-    vector<vector<int>> matriz1;
-    for (int i = 0; i < n1; i++){
-        matriz1.push_back(vector<int>());
-        for (int j = 0; j < m1; ++j) {
-            matriz1[i].push_back(rand() % 10 + 1);
-        }
-    }
-
-    //cria matriz 2
-    vector<vector<int>> matriz2;
-    for (int i = 0; i < n2; i++){
-        matriz2.push_back(vector<int>());
-        for (int j = 0; j < m2; ++j) {
-            matriz2[i].push_back(rand() % 10 + 1);
-        }
-    }
-
+    //inicia a marcacao do tempo
     chrono::steady_clock::time_point begin = chrono::steady_clock::now();
-
     //cria matriz resultado
     vector<vector<int>> res;
-    for (int i = 0; i < n1; ++i) {
+    size_t tam{matriz1.size()-1};
+    for (size_t i = 0; i <tam; ++i) {
         res.push_back(vector<int>());
-        for (int j = 0; j < m2; ++j) {
+        for (size_t j = 0; j <tam; ++j) {
             res[i].push_back(0);
-            for (int k = 0; k < m1; ++k) {
+            for (size_t k = 0; k < tam; ++k) {
                 res[i][j] += matriz1[i][k] * matriz2[k][j];
+                
             }
+            //std::cout<<res[i][j]<<" ";
         }
+        //std::cout<<endl;
     }
-
+    //finaliza a marcacao do tempo
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
-
-
     cout << "Tempo " <<chrono::duration_cast<chrono::microseconds>(end - begin).count() << "(ms)" <<endl;
-    */
+
     arquivo1.close();
-    //arquivo2.close();
+    arquivo2.close();
+    //abre arquivo para anotar os tempos
+    std::ofstream outfile;
+    outfile.open("/root/Fernanda/TI-2021.2/SO/trabalho-01/Trabalho-01-SO/tempos", std::ios_base::app); 
+    //arquivo3.open("tempos", ios::in); 
+
+    outfile<<tam<<" x "<<tam<<": ";
+    outfile<<chrono::duration_cast<chrono::microseconds>(end - begin).count() << "(ms)" <<endl;
+
+    
 }

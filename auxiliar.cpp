@@ -6,28 +6,6 @@ using std::endl;
 #include <fstream>
 using std::ofstream;
 #include <cstdlib>
-//#include "auxiliar.h"
-//#include "function.h"
-//abrir o arquivo
-//outfile.open("caminho do arquivo", std::ios_base::app); 
-
-//escrever no arquivo
-//outfile<<pos<<"          ";
-
-//fechar o arquivo
-//outfile.close();
-
-//usar o chrono
-//auto start = std::chrono::steady_clock::now();/*comeca a contagem do tempo*/
-//std::chrono::time_point<std::chrono::steady_clock> end = std::chrono::steady_clock::now();//auto result = sa::bsearch( &vet[0], &vet[pos], valor );
-//std::chrono::duration<double> diff = end - start;
-// Milliseconds (10^-3)
-//std::cout << "\t\t>>> " << std::chrono::duration <double, std::milli> (diff).count()<< " ms" << std::endl;
-//soma+=std::chrono::duration <double, std::milli> (diff).count();
-
-
-//cria vetor de coluna
-//preenche a coluna1 com os enderecos dos vetores de linha
 
 
 int main(int argc, char *argv[]){
