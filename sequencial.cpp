@@ -106,8 +106,8 @@ int main(int argc, char *argv[]){
     }
     //finaliza a marcacao do tempo
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
-    cout << "Tempo " <<chrono::duration_cast<chrono::microseconds>(end - begin).count() << "(ms)" <<endl;
-
+    cout << "Tempo " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+    //soma+=std::chrono::duration <double, std::milli> (diff).count();
     arquivo1.close();
     arquivo2.close();
     //abre arquivo para anotar os tempos
@@ -116,7 +116,7 @@ int main(int argc, char *argv[]){
     //arquivo3.open("tempos", ios::in); 
 
     outfile<<tam<<" x "<<tam<<": ";
-    outfile<<chrono::duration_cast<chrono::microseconds>(end - begin).count() << "(ms)" <<endl;
+    outfile<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
 
     
 }
