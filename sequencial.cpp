@@ -10,12 +10,6 @@ using namespace std;
 #include <string>
 #include <stdio.h>
 
-/*
-void sequencial(FILE* matrizes){    
-
-}
-*/
-
 int main(int argc, char *argv[]){
     string arq1, arq2, linha;
     char num;
@@ -24,7 +18,6 @@ int main(int argc, char *argv[]){
     arq2 = argv[2];
     fstream arquivo1;
     fstream arquivo2;
-    //fstream arquivo3;
     //abre o arquivo 1
     arquivo1.open(arq1, ios::in); 
 
@@ -57,6 +50,7 @@ int main(int argc, char *argv[]){
         }
     }
 
+    //le o arquivo 2
     arquivo2.open(arq2, ios::in); 
 
     if (!arquivo2) {
@@ -118,5 +112,5 @@ int main(int argc, char *argv[]){
     outfile<<tam<<" x "<<tam<<": ";
     outfile<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
 
-    
+    return 0;
 }
