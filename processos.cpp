@@ -115,11 +115,10 @@ int main(int argc, char *argv[]){
             //std::cout<<"sou o processo "<<i<<" vou calcular de "<<inicial<<" até antes de "<<final<<endl;
             //k é o contador da posicao linear da matriz em que o processo esta calculando
             for(int k{inicial}; k<final; k++){
-                std::cout<<i<<" entrei no for do k\n";
+                std::cout<<i<<" k: "<<k<<endl;
                 //calculo da posicao em 2d na matriz
                 x = k/tam;
                 y = k%tam;
-                //std::cout<<i<<" posicao: "<<posicao<<" matriz: "<<x<<y<<endl;
                 //checa se esta na coluna 0
                 if(y==0){
                     //std::cout<<endl;
@@ -128,15 +127,16 @@ int main(int argc, char *argv[]){
                     res.push_back(vector<int>());
                 }
                 //aumenta em uma posicao da linha
-                std::cout<<i<<" aumentando em uma posicao da linha\n";
-                //dando erro na hora de aumentar a posicao do vetor
+                //dando erro na hora de aumentar a posicao do vetor, na posicao 10
                 res[x].push_back(0);
-                std::cout<<i<<" dei push back na linha\n";
                 //calcular o elementos x y da matriz dentro do intervalo do processo
                 for(int a{0}; a<tam; a++){
-                    std::cout<<i<<" entrei no for do a\n";
+                    std::cout<<i<<" k: "<<k<<" tam: "<<tam<<" "<<x<<a<<" * "<<a<<y<<endl;
+                    //erro ao tentar imprimir res[x][y] na posicao 10
                     res[x][y] += matriz1[x][a] * matriz2[a][y];
+                    //std::cout<<i<<" k: "<<k<<" tam: "<<tam<<" "<<x<<a<<" * "<<a<<y<<endl;
                 }
+                
                 std::cout<<i<<" "<<x<<y<<": "<<res[x][y]<<" \n";
                 
             }
