@@ -98,48 +98,42 @@ int main(int argc, char *argv[]){
     //criacao da matriz resultado
     vector<vector<int>> res;
     size_t tam{matriz1.size()-1};
+    for(size_t d{0}; d<tam; d++){
+        res.push_back(vector<int>());
+        for(size_t c{0}; c<tam; c++){
+            res[d].push_back(0);
+        }
+    }
+
     int nprocessos = tam*tam/p;
     int pid;
     int inicial{0}, final{0}, x{0}, y{0};
-    //std::cout<<"tam: "<<tam<<endl;
+
     //inicia a criacao de processos
     for(int i{0}; i<nprocessos; i++){
         //onde o processo deve comecar e terminar de calcular na matriz
         inicial = p*i;
         final = p*(i+1);
-        //std::cout<<"processo "<<i<<endl;
         //pai cria o filho dentro do for
         pid = fork();
         //filhos so executam dentro do if
         if(pid==0){
-            //std::cout<<"sou o processo "<<i<<" vou calcular de "<<inicial<<" até antes de "<<final<<endl;
+            //inicia a marcacao do tempo
+            chrono::steady_clock::time_point begin = chrono::steady_clock::now();
             //k é o contador da posicao linear da matriz em que o processo esta calculando
             for(int k{inicial}; k<final; k++){
-                std::cout<<i<<" k: "<<k<<endl;
                 //calculo da posicao em 2d na matriz
                 x = k/tam;
                 y = k%tam;
-                //checa se esta na coluna 0
-                if(y==0){
-                    //std::cout<<endl;
-                    //aumenta em uma linha
-                    std::cout<<i<<" aumentando em uma linha\n";
-                    res.push_back(vector<int>());
-                }
-                //aumenta em uma posicao da linha
-                //dando erro na hora de aumentar a posicao do vetor, na posicao 10
-                res[x].push_back(0);
                 //calcular o elementos x y da matriz dentro do intervalo do processo
-                for(int a{0}; a<tam; a++){
-                    std::cout<<i<<" k: "<<k<<" tam: "<<tam<<" "<<x<<a<<" * "<<a<<y<<endl;
-                    //erro ao tentar imprimir res[x][y] na posicao 10
+                for(size_t a{0}; a<tam; a++){
                     res[x][y] += matriz1[x][a] * matriz2[a][y];
-                    //std::cout<<i<<" k: "<<k<<" tam: "<<tam<<" "<<x<<a<<" * "<<a<<y<<endl;
                 }
-                
-                std::cout<<i<<" "<<x<<y<<": "<<res[x][y]<<" \n";
-                
+                //std::cout<<i<<" "<<x<<y<<": "<<res[x][y]<<" \n";
             }
+            //finaliza a marcacao do tempo
+            chrono::steady_clock::time_point end = chrono::steady_clock::now();
+            cout <<i<< " Tempo " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
             //o break faz com que os filhos terminem de executar depois do calculo e nao criem mais filhos
             break;
         }
