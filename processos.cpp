@@ -17,7 +17,7 @@ using namespace std;
 #include <stdio.h>
 #include <sys/wait.h>
 #include <unistd.h>
-
+#include <bits/stdc++.h>
 int main(int argc, char *argv[]){
     string arq1, arq2, linha;
     char num;
@@ -118,6 +118,11 @@ int main(int argc, char *argv[]){
         pid = fork();
         //filhos so executam dentro do if
         if(pid==0){
+            //cria o arquivo dentro do processo filho
+            stringstream arch;
+            arch<<"processo_"<<i<<".txt";
+            ofstream file;
+            file.open(arch.str());
             //inicia a marcacao do tempo
             chrono::steady_clock::time_point begin = chrono::steady_clock::now();
             //k é o contador da posicao linear da matriz em que o processo esta calculando
@@ -129,11 +134,16 @@ int main(int argc, char *argv[]){
                 for(size_t a{0}; a<tam; a++){
                     res[x][y] += matriz1[x][a] * matriz2[a][y];
                 }
+                //file<<res[x][y]<<" ";
+                //file<<"oi ";
                 //std::cout<<i<<" "<<x<<y<<": "<<res[x][y]<<" \n";
             }
+            //file<<endl;
             //finaliza a marcacao do tempo
             chrono::steady_clock::time_point end = chrono::steady_clock::now();
-            cout <<i<< " Tempo " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+            file<<tam<<" x "<<tam<<endl<<"Tempo: "<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+            file.close();
+            //cout <<i<< " Tempo " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
             //o break faz com que os filhos terminem de executar depois do calculo e nao criem mais filhos
             break;
         }
