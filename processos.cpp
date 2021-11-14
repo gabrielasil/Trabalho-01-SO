@@ -1,9 +1,3 @@
-//recebe como entrada dois arquivos e um numero inteiro p (particao)
-//dividir a matriz em p elementos, e dar cada particao para um processo diferente
-//lembrar de abrir e fechar o arquivo antes de criar qualquer processo
-//criar tam*tam/p arquivos, cada um recebe apenas uma parte do resultado
-//cada arquivo comeca com o tamanho da matriz total (tam)
-
 #include<iostream>
 using std::cout;
 using std::endl;
@@ -106,18 +100,19 @@ int main(int argc, char *argv[]){
     }
 
     int nprocessos = tam*tam/p;
-    int pid;
+    int vetor_pid[nprocessos];
+    //int pid;
     int inicial{0}, final{0}, x{0}, y{0};
 
     //inicia a criacao de processos
-    for(int i{0}; i<nprocessos; i++){
+    for(int i{0}; i<nprocessos; i++){ 
         //onde o processo deve comecar e terminar de calcular na matriz
         inicial = p*i;
         final = p*(i+1);
         //pai cria o filho dentro do for
-        pid = fork();
+        vetor_pid[i] = fork();
         //filhos so executam dentro do if
-        if(pid==0){
+        if(vetor_pid[i]==0){
             //cria o arquivo dentro do processo filho
             stringstream arch;
             arch<<"processo_"<<i<<".txt";
