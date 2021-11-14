@@ -20,8 +20,14 @@ int P = 0;
 int linha_atual = 0;
 int coluna_atual = 0;
 
+
 void* multi(void* tid)
-{
+{   
+    stringstream arch;
+    arch<<"teste_"<<(int)(size_t)tid<<".txt";
+    ofstream file;
+    file.open(arch.str());
+    chrono::steady_clock::time_point begin = chrono::steady_clock::now();
 	int linha_atual = (P * (size_t)tid) / mat_size;
 	int coluna_atual = (P * (size_t)tid )% mat_size;
 
@@ -29,12 +35,18 @@ void* multi(void* tid)
 		for(int j = 0; j < mat_size; j++){
 			matriz3[linha_atual][coluna_atual] += matriz1[linha_atual][j] * matriz2[j][coluna_atual];
 		}
+        file<<"c"<<linha_atual<<coluna_atual<<" "<<matriz3[linha_atual][coluna_atual]<<endl;
 		coluna_atual++;
 		if(coluna_atual == mat_size){				
 			linha_atual++;
 			coluna_atual = 0;
 		}
 	}
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+    cout << "Tempo Thread "<< tid << ": " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+
+    file<<mat_size<<" "<<mat_size<<endl<<"Tempo: "<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+    file.close();
 	pthread_exit(NULL);
 }
 
@@ -134,12 +146,12 @@ int main(int argc, char const *argv[])
 		pthread_join(threads[i], NULL);
 	}  
 
-    cout << endl;
+   /* cout << endl;
     for (int i = 0; i < mat_size; i++) {
         for (int j = 0; j < mat_size; j++)
             cout << matriz3[i][j] << " ";       
         cout << endl;
-    }
+    } */
     return 0;
 }
 
