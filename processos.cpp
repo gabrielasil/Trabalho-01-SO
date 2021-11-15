@@ -119,6 +119,7 @@ int main(int argc, char *argv[]){
             ofstream file;
             file.open(arch.str());
             //inicia a marcacao do tempo
+            file<<tam<<" x "<<tam<<endl;
             chrono::steady_clock::time_point begin = chrono::steady_clock::now();
             //k é o contador da posicao linear da matriz em que o processo esta calculando
             for(int k{inicial}; k<final; k++){
@@ -129,16 +130,14 @@ int main(int argc, char *argv[]){
                 for(size_t a{0}; a<tam; a++){
                     res[x][y] += matriz1[x][a] * matriz2[a][y];
                 }
-                //file<<res[x][y]<<" ";
-                //file<<"oi ";
-                //std::cout<<i<<" "<<x<<y<<": "<<res[x][y]<<" \n";
+                file<<"c"<<x<<y<<" "<<res[x][y]<<endl;
             }
-            //file<<endl;
             //finaliza a marcacao do tempo
             chrono::steady_clock::time_point end = chrono::steady_clock::now();
-            file<<tam<<" x "<<tam<<endl<<"Tempo: "<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+            file<<"Tempo: "<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+            
             file.close();
-            //cout <<i<< " Tempo " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+            cout <<i<< " Tempo " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
             //o break faz com que os filhos terminem de executar depois do calculo e nao criem mais filhos
             break;
         }

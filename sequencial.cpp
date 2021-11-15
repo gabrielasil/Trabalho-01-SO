@@ -9,6 +9,9 @@ using std::ofstream;
 using namespace std;
 #include <string>
 #include <stdio.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <bits/stdc++.h>
 
 int main(int argc, char *argv[]){
     string arq1, arq2, linha;
@@ -80,12 +83,21 @@ int main(int argc, char *argv[]){
             l2++;
         }
     }
+    arquivo1.close();
+    arquivo2.close();
+
+    //abrir arquivo novo para poder guardar os resultados
+    stringstream arch;
+    arch<<"tempos-sequencial-file.txt";
+    ofstream file;
+    file.open(arch.str());
 
     //inicia a marcacao do tempo
     chrono::steady_clock::time_point begin = chrono::steady_clock::now();
     //cria matriz resultado
     vector<vector<int>> res;
     size_t tam{matriz1.size()-1};
+    file<<tam<<" x "<<tam<<" : "<<endl;
     for (size_t i = 0; i <tam; ++i) {
         res.push_back(vector<int>());
         for (size_t j = 0; j <tam; ++j) {
@@ -94,23 +106,14 @@ int main(int argc, char *argv[]){
                 res[i][j] += matriz1[i][k] * matriz2[k][j];
                 
             }
-            //std::cout<<res[i][j]<<" ";
+            file<<"c"<<i<<j<<" ";
+            file<<res[i][j]<<endl;
         }
-        //std::cout<<endl;
     }
     //finaliza a marcacao do tempo
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
     cout << "Tempo " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
-    //soma+=std::chrono::duration <double, std::milli> (diff).count();
-    arquivo1.close();
-    arquivo2.close();
-    //abre arquivo para anotar os tempos
-    std::ofstream outfile;
-    outfile.open("/root/Fernanda/TI-2021.2/SO/trabalho-01/Trabalho-01-SO/tempos", std::ios_base::app); 
-    //arquivo3.open("tempos", ios::in); 
-
-    outfile<<tam<<" x "<<tam<<": ";
-    outfile<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
-
+    file<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+    file.close();
     return 0;
 }

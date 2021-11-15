@@ -44,8 +44,8 @@ void* multi(void* tid)
 	}
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
     cout << "Tempo Thread "<< tid << ": " <<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
-
     file<<mat_size<<" "<<mat_size<<endl<<"Tempo: "<<chrono::duration_cast<chrono::milliseconds>(end - begin).count() << "(ms)" <<endl;
+    
     file.close();
 	pthread_exit(NULL);
 }
