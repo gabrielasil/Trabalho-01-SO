@@ -16,7 +16,7 @@ int main(int argc, char *argv[]){
     c2 = atoi(argv[4]);
 
     std::ofstream outfile;
-    outfile.open("/root/Fernanda/TI-2021.2/SO/trabalho-01/Trabalho-01-SO/matriz1", std::ios_base::app); 
+    outfile.open("matriz1", std::ios_base::app); 
     std::vector<std::vector<int>>coluna1;/*cria o vetor da coluna1*/
     for(int i{0}; i<l1; i++){/*cria as l1 posicoes pra os vetores de linha*/
         coluna1.push_back(std::vector<int>());/*cria vetor dentro da posicao*/
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){
     }
     outfile.close();
 
-    outfile.open("/root/Fernanda/TI-2021.2/SO/trabalho-01/Trabalho-01-SO/matriz2", std::ios_base::app); 
+    outfile.open("matriz2", std::ios_base::app); 
     std::vector<std::vector<int>>coluna2;
     for(int i{0}; i<l2; i++){
         coluna2.push_back(std::vector<int>());
